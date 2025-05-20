@@ -41,10 +41,10 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
         </Avatar>
 
         <div className="text-center md:text-left w-full">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[60px] font-bold text-foreground leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] xl:text-[60px] font-bold text-foreground leading-tight">
             Hi, I’m <span className="text-primary">{firstName}</span> {lastName}
           </h1>
-          <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-bold text-foreground mt-2 leading-tight">{profile.headline}</p>
+          <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] xl:text-[48px] font-bold text-foreground mt-2 leading-tight">{profile.headline}</p>
         </div>
 
         <div className="w-full bg-card/50 p-4 rounded-lg space-y-3 text-sm max-w-xs md:max-w-full">
