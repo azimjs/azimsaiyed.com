@@ -43,7 +43,7 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
       <div className="text-center md:text-left w-full">
         <h1 className="text-4xl lg:text-5xl font-bold">
           <span className="text-primary">{firstName}</span>
-          <span> {lastName}</span>
+          <span className="text-foreground"> {lastName}</span> {/* Ensured foreground for last name */}
         </h1>
         <p className="text-xl text-muted-foreground mt-2">{profile.headline}</p>
       </div>
@@ -71,7 +71,7 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
 
       <div className="flex space-x-4 justify-center md:justify-start">
         {profile.socialLinks.map((link) => {
-          const IconComponent = link.icon ? iconComponents[link.icon] : null;
+          const IconComponent = link.icon && iconComponents[link.icon] ? iconComponents[link.icon] : null;
           return (
             <Link 
               key={link.id} 
@@ -81,7 +81,7 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
               aria-label={link.name}
               className="text-muted-foreground hover:text-primary transition-colors"
             >
-              {IconComponent && <IconComponent className="w-6 h-6" />}
+              {IconComponent ? <IconComponent className="w-6 h-6" /> : <span className="text-xs">({link.name})</span>}
             </Link>
           );
         })}
