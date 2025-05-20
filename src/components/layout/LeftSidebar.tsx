@@ -41,13 +41,13 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
         </Avatar>
 
         <div className="text-center md:text-left w-full">
-          <h1 className="text-4xl sm:text-5xl md:text-[60px] font-bold text-foreground leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[60px] font-bold text-foreground leading-tight">
             Hi, I’m <span className="text-primary">{firstName}</span> {lastName}
           </h1>
-          <p className="text-3xl sm:text-4xl md:text-[48px] font-bold text-foreground mt-2 leading-tight">{profile.headline}</p>
+          <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-bold text-foreground mt-2 leading-tight">{profile.headline}</p>
         </div>
 
-        <div className="w-full bg-card/50 p-4 rounded-lg space-y-3 text-sm">
+        <div className="w-full bg-card/50 p-4 rounded-lg space-y-3 text-sm max-w-xs md:max-w-full">
           {profile.phone && (
             <div className="flex items-center">
               <Phone className="w-4 h-4 mr-3 text-primary" />
@@ -89,7 +89,7 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
         <Button
           asChild
           size="lg"
-          className="w-full bg-card hover:bg-card/80 text-primary border border-primary/50"
+          className="w-full bg-card hover:bg-card/80 text-primary border border-primary/50 max-w-xs md:max-w-full"
         >
           <Link href={profile.cvUrl} target="_blank" download>
             <Download className="mr-2 h-5 w-5" />
