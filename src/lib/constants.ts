@@ -3,8 +3,8 @@ import type { ProfileData } from '@/types';
 // Lucide icons are now imported in the components that use them, based on string names.
 
 export const MOCK_PROFILE_DATA: ProfileData = {
-  name: 'Alex Johnson',
-  headline: 'Full Stack Developer',
+  name: 'Azim Saiyed',
+  headline: 'Software Engineer',
   profileImageUrl: 'https://placehold.co/200x200.png', 
   summary:
     "Hello! I'm Alex Johnson, a passionate Full Stack Developer based in San Francisco. I have a strong background in creating dynamic and responsive web applications, with a keen eye for detail and user experience. My expertise lies in JavaScript, React, Node.js, and Python, and I'm always eager to explore new technologies to build innovative solutions.\n\nI thrive in collaborative environments and enjoy tackling complex challenges. My goal is to leverage my skills to contribute to impactful projects that make a difference. When I'm not coding, you can find me exploring the latest tech trends or hiking in the nearby trails.",

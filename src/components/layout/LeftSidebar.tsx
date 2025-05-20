@@ -29,73 +29,74 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
   const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
 
   return (
-    <aside className="w-full md:w-1/2 bg-background text-foreground p-6 md:p-8 shadow-lg md:fixed md:h-screen md:overflow-y-auto flex flex-col items-center justify-center space-y-6 print:hidden">
-      
-      <Avatar className="w-32 h-32 md:w-40 md:h-40 text-5xl border-4 border-primary/50 shadow-md">
-        <AvatarImage 
-          src={profile.profileImageUrl || `https://placehold.co/200x200.png?text=${initials}`} 
-          alt={profile.name}
-          data-ai-hint="profile picture"
-        />
-        <AvatarFallback>{initials}</AvatarFallback>
-      </Avatar>
+    <aside className="w-full md:w-1/2 bg-background text-foreground p-6 md:p-8 shadow-lg md:fixed md:h-screen md:overflow-y-auto flex flex-col items-center justify-center print:hidden">
+      <div className="w-full max-w-md flex flex-col items-center md:items-start space-y-6">
+        <Avatar className="w-32 h-32 md:w-40 md:h-40 text-5xl border-4 border-primary/50 shadow-md">
+          <AvatarImage
+            src={profile.profileImageUrl || `https://placehold.co/200x200.png?text=${initials}`}
+            alt={profile.name}
+            data-ai-hint="profile picture"
+          />
+          <AvatarFallback>{initials}</AvatarFallback>
+        </Avatar>
 
-      <div className="text-center md:text-left w-full max-w-md">
-        <h1 className="text-4xl lg:text-5xl font-bold text-foreground">
-          Hi, I’m <span className="text-primary">{firstName}</span> {lastName}
-        </h1>
-        <p className="text-4xl lg:text-5xl font-bold text-foreground mt-2">{profile.headline}</p>
-      </div>
-      
-      <div className="w-full max-w-xs bg-card/50 p-4 rounded-lg space-y-3 text-sm">
-        {profile.phone && (
-          <div className="flex items-center">
-            <Phone className="w-4 h-4 mr-3 text-primary" />
-            <span className="text-muted-foreground">{profile.phone}</span>
-          </div>
-        )}
-        {profile.email && (
-          <div className="flex items-center">
-            <Mail className="w-4 h-4 mr-3 text-primary" />
-            <Link href={`mailto:${profile.email}`} className="text-muted-foreground hover:text-primary break-all">{profile.email}</Link>
-          </div>
-        )}
-        {profile.address && (
-          <div className="flex items-center">
-            <MapPin className="w-4 h-4 mr-3 text-primary" />
-            <span className="text-muted-foreground">{profile.address}</span>
-          </div>
-        )}
-      </div>
+        <div className="text-center md:text-left w-full">
+          <h1 className="text-4xl lg:text-5xl font-bold text-foreground">
+            Hi, I’m <span className="text-primary">{firstName}</span> {lastName}
+          </h1>
+          <p className="text-4xl lg:text-5xl font-bold text-foreground mt-2">{profile.headline}</p>
+        </div>
 
-      <div className="flex space-x-4 justify-center md:justify-start w-full max-w-xs">
-        {profile.socialLinks.map((link) => {
-          const IconComponent = link.icon && iconComponents[link.icon] ? iconComponents[link.icon] : link.icon && iconComponents[link.icon.toLowerCase()] ? iconComponents[link.icon.toLowerCase()] : null;
-          return (
-            <Link 
-              key={link.id} 
-              href={link.url} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              aria-label={link.name}
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              {IconComponent ? <IconComponent className="w-6 h-6" /> : <span className="text-xs">({link.name})</span>}
-            </Link>
-          );
-        })}
+        <div className="w-full bg-card/50 p-4 rounded-lg space-y-3 text-sm">
+          {profile.phone && (
+            <div className="flex items-center">
+              <Phone className="w-4 h-4 mr-3 text-primary" />
+              <span className="text-muted-foreground">{profile.phone}</span>
+            </div>
+          )}
+          {profile.email && (
+            <div className="flex items-center">
+              <Mail className="w-4 h-4 mr-3 text-primary" />
+              <Link href={`mailto:${profile.email}`} className="text-muted-foreground hover:text-primary break-all">{profile.email}</Link>
+            </div>
+          )}
+          {profile.address && (
+            <div className="flex items-center">
+              <MapPin className="w-4 h-4 mr-3 text-primary" />
+              <span className="text-muted-foreground">{profile.address}</span>
+            </div>
+          )}
+        </div>
+
+        <div className="flex space-x-4 w-full justify-center md:justify-start">
+          {profile.socialLinks.map((link) => {
+            const IconComponent = link.icon && iconComponents[link.icon] ? iconComponents[link.icon] : link.icon && iconComponents[link.icon.toLowerCase()] ? iconComponents[link.icon.toLowerCase()] : null;
+            return (
+              <Link
+                key={link.id}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.name}
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                {IconComponent ? <IconComponent className="w-6 h-6" /> : <span className="text-xs">({link.name})</span>}
+              </Link>
+            );
+          })}
+        </div>
+
+        <Button
+          asChild
+          size="lg"
+          className="w-full bg-card hover:bg-card/80 text-primary border border-primary/50"
+        >
+          <Link href={profile.cvUrl} target="_blank" download>
+            <Download className="mr-2 h-5 w-5" />
+            Download CV
+          </Link>
+        </Button>
       </div>
-      
-      <Button 
-        asChild 
-        size="lg" 
-        className="w-full max-w-xs bg-card hover:bg-card/80 text-primary border border-primary/50"
-      >
-        <Link href={profile.cvUrl} target="_blank" download>
-          <Download className="mr-2 h-5 w-5" />
-          Download CV
-        </Link>
-      </Button>
     </aside>
   );
 }
