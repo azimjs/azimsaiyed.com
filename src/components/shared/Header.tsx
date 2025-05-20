@@ -13,9 +13,6 @@ export function Header() {
           <Link href="#profile" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
             Profile
           </Link>
-          <Link href="#ai-personalization" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
-            AI Personalization
-          </Link>
           <Link href="#projects" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
             Projects
           </Link>
