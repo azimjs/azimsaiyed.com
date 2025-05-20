@@ -39,7 +39,7 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     
-    --radius: 0.3rem; /* Slightly less rounded corners */
+    --radius: 0.75rem; /* Increased for more rounded corners */
 
     /* Sidebar specific colors */
     --sidebar-background: 224 15% 13%; /* Same as main background */
@@ -118,7 +118,7 @@
     background-color: transparent !important;
     background-image: none !important;
   }
-  .shadow-lg, .shadow-xl, .shadow-md {
+  .shadow-lg, .shadow-xl, .shadow-md, .shadow-sm {
     box-shadow: none !important;
   }
   .border, .border-t, .border-primary\/30 {
@@ -157,7 +157,7 @@
     height: auto !important;
     overflow-y: visible !important;
   }
-  .md\:ml-80, .lg\:ml-96 {
+  .md\:ml-\[50\%\] { /* Updated to match the dynamic class */
     margin-left: 0 !important;
   }
 }

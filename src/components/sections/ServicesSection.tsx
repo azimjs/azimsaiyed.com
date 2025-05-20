@@ -20,8 +20,8 @@ interface ServicesSectionProps {
 
 export function ServicesSection({ services }: ServicesSectionProps) {
   return (
-    <SectionWrapper id="services"> {/* Removed bg-background */}
-      <Card className="bg-card shadow-lg">
+    <SectionWrapper id="services">
+      <Card className="bg-card shadow-md">
         <CardHeader>
           <SectionTitle subtitle="Discover the ways I can help bring your ideas to life.">What I Do?</SectionTitle>
         </CardHeader>
@@ -31,7 +31,7 @@ export function ServicesSection({ services }: ServicesSectionProps) {
               {services.map((service) => {
                 const IconComponent = service.icon ? serviceIconComponents[service.icon] : null;
                 return (
-                  <ServiceItemCard key={service.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col text-center md:text-left bg-background"> {/* Service items on slightly different bg */}
+                  <ServiceItemCard key={service.id} className="shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col text-center md:text-left bg-background"> {/* Service items on slightly different bg */}
                     <ServiceItemCardHeader className="items-center md:items-start">
                       {IconComponent && (
                         <div className="mb-3 text-primary bg-primary/10 p-3 rounded-lg inline-block">

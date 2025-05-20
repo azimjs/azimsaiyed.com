@@ -11,11 +11,11 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -64,12 +64,11 @@ export function ContactFormSection({ contactInfo }: ContactFormSectionProps) {
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     console.log("Form Submitted:", values);
-    // console.log("Current Time (client):", new Date().toLocaleTimeString());
     
     toast({
       title: "Message Sent!",
       description: "Thank you for your message. I'll get back to you soon.",
-      variant: "default", // "default" is usually blue or your primary theme color
+      variant: "default", 
     });
     form.reset();
     setIsSubmitting(false);
@@ -77,7 +76,7 @@ export function ContactFormSection({ contactInfo }: ContactFormSectionProps) {
 
   return (
     <SectionWrapper id="contact">
-      <Card className="bg-card shadow-lg">
+      <Card className="bg-card shadow-md">
         <CardHeader>
           <SectionTitle subtitle="Feel free to reach out for collaborations or just a friendly chat.">Get In Touch</SectionTitle>
         </CardHeader>

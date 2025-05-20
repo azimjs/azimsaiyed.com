@@ -2,7 +2,7 @@
 import type { WorkExperience, EducationItem as EducationType } from '@/types';
 import { SectionWrapper } from '@/components/shared/SectionWrapper';
 import { SectionTitle } from '@/components/shared/SectionTitle';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'; // Main Card
+import { Card, CardContent, CardHeader } from '@/components/ui/card'; // Main Card
 import { Card as ItemCard, CardContent as ItemCardContent, CardHeader as ItemCardHeader, CardTitle as ItemCardTitle, CardDescription as ItemCardDescription } from '@/components/ui/card'; // For inner items
 import { Briefcase, GraduationCap } from 'lucide-react';
 import Image from 'next/image';
@@ -79,8 +79,8 @@ interface ResumeSectionProps {
 
 export function ResumeSection({ workExperience, education }: ResumeSectionProps) {
   return (
-    <SectionWrapper id="resume"> {/* Removed bg-background */}
-      <Card className="bg-card shadow-lg">
+    <SectionWrapper id="resume">
+      <Card className="bg-card shadow-md">
         <CardHeader>
           <SectionTitle subtitle="My professional journey and academic qualifications.">Resume</SectionTitle>
         </CardHeader>

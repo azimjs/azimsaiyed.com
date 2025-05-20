@@ -2,7 +2,7 @@
 import type { Project } from '@/types';
 import { SectionWrapper } from '@/components/shared/SectionWrapper';
 import { SectionTitle } from '@/components/shared/SectionTitle';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'; // Main Card
+import { Card, CardContent, CardHeader } from '@/components/ui/card'; // Main Card
 import { Card as ProjectItemCard, CardContent as ProjectItemCardContent, CardDescription as ProjectItemCardDescription, CardFooter as ProjectItemCardFooter, CardHeader as ProjectItemCardHeader, CardTitle as ProjectItemCardTitle } from '@/components/ui/card'; // For inner items
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -14,9 +14,9 @@ interface ProjectShowcaseSectionProps {
   projects: Project[];
 }
 
-function ProjectItemDisplay({ project }: { project: Project }) { // Renamed from ProjectCard to avoid confusion
+function ProjectItemDisplay({ project }: { project: Project }) { 
   return (
-    <ProjectItemCard className="flex flex-col h-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-background group"> {/* Item cards on slightly different bg */}
+    <ProjectItemCard className="flex flex-col h-full overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-background group"> {/* Item cards on slightly different bg */}
       <div className="relative w-full h-52 overflow-hidden">
         {project.imageUrl ? (
           <Image
@@ -73,7 +73,7 @@ function ProjectItemDisplay({ project }: { project: Project }) { // Renamed from
 export function ProjectShowcaseSection({ projects }: ProjectShowcaseSectionProps) {
   return (
     <SectionWrapper id="portfolio">
-      <Card className="bg-card shadow-lg">
+      <Card className="bg-card shadow-md">
         <CardHeader>
           <SectionTitle subtitle="A selection of projects I've worked on.">Portfolio</SectionTitle>
         </CardHeader>

@@ -10,8 +10,8 @@ interface AboutMeSectionProps {
 
 export function AboutMeSection({ summary }: AboutMeSectionProps) {
   return (
-    <SectionWrapper id="about"> {/* Removed bg-background */}
-      <Card className="bg-card shadow-lg">
+    <SectionWrapper id="about">
+      <Card className="bg-card shadow-md">
         <CardHeader>
           <SectionTitle>About Me</SectionTitle>
         </CardHeader>
