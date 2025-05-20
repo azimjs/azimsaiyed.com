@@ -18,7 +18,7 @@ export function AboutMeSection({ summary }: AboutMeSectionProps) {
           <Separator className="mt-4" />
         </CardHeader>
         <CardContent>
-          <div className="prose prose-lg max-w-none text-[#7a828a] leading-relaxed whitespace-pre-wrap dark:prose-invert">
+          <div className="prose prose-lg max-w-none text-foreground/90 leading-relaxed whitespace-pre-wrap dark:prose-invert">
             <p>{summary}</p>
           </div>
         </CardContent>
