@@ -40,11 +40,11 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
         <AvatarFallback>{initials}</AvatarFallback>
       </Avatar>
 
-      <div className="text-center w-full max-w-md">
+      <div className="text-center md:text-left w-full max-w-md">
         <h1 className="text-4xl lg:text-5xl font-bold text-foreground">
           Hi, I’m <span className="text-primary">{firstName}</span> {lastName}
         </h1>
-        <p className="text-4xl lg:text-5xl font-bold text-muted-foreground mt-2">{profile.headline}</p>
+        <p className="text-4xl lg:text-5xl font-bold text-foreground mt-2">{profile.headline}</p>
       </div>
       
       <div className="w-full max-w-xs bg-card/50 p-4 rounded-lg space-y-3 text-sm">
@@ -68,9 +68,9 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
         )}
       </div>
 
-      <div className="flex space-x-4 justify-center w-full max-w-xs">
+      <div className="flex space-x-4 justify-center md:justify-start w-full max-w-xs">
         {profile.socialLinks.map((link) => {
-          const IconComponent = link.icon && iconComponents[link.icon] ? iconComponents[link.icon] : null;
+          const IconComponent = link.icon && iconComponents[link.icon] ? iconComponents[link.icon] : link.icon && iconComponents[link.icon.toLowerCase()] ? iconComponents[link.icon.toLowerCase()] : null;
           return (
             <Link 
               key={link.id} 
