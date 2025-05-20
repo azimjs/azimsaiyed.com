@@ -2,7 +2,8 @@
 import type { Project } from '@/types';
 import { SectionWrapper } from '@/components/shared/SectionWrapper';
 import { SectionTitle } from '@/components/shared/SectionTitle';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'; // Main Card
+import { Card as ProjectItemCard, CardContent as ProjectItemCardContent, CardDescription as ProjectItemCardDescription, CardFooter as ProjectItemCardFooter, CardHeader as ProjectItemCardHeader, CardTitle as ProjectItemCardTitle } from '@/components/ui/card'; // For inner items
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
@@ -13,9 +14,9 @@ interface ProjectShowcaseSectionProps {
   projects: Project[];
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectItemDisplay({ project }: { project: Project }) { // Renamed from ProjectCard to avoid confusion
   return (
-    <Card className="flex flex-col h-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card group">
+    <ProjectItemCard className="flex flex-col h-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-background group"> {/* Item cards on slightly different bg */}
       <div className="relative w-full h-52 overflow-hidden">
         {project.imageUrl ? (
           <Image
@@ -32,11 +33,11 @@ function ProjectCard({ project }: { project: Project }) {
            </div>
         )}
       </div>
-      <CardHeader className="pb-2">
-        <CardTitle className="text-xl text-foreground">{project.name}</CardTitle>
-        <CardDescription className="h-20 overflow-y-auto text-sm pt-1 text-muted-foreground">{project.description}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-grow pt-2">
+      <ProjectItemCardHeader className="pb-2">
+        <ProjectItemCardTitle className="text-xl text-foreground">{project.name}</ProjectItemCardTitle>
+        <ProjectItemCardDescription className="h-20 overflow-y-auto text-sm pt-1 text-muted-foreground">{project.description}</ProjectItemCardDescription>
+      </ProjectItemCardHeader>
+      <ProjectItemCardContent className="flex-grow pt-2">
         {project.tags && project.tags.length > 0 && (
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
@@ -44,40 +45,50 @@ function ProjectCard({ project }: { project: Project }) {
             ))}
           </div>
         )}
-      </CardContent>
-      <CardFooter className="flex justify-start gap-2 border-t pt-4 mt-auto">
+      </ProjectItemCardContent>
+      <ProjectItemCardFooter className="flex justify-start gap-2 border-t pt-4 mt-auto">
         {project.projectUrl && (
           <Button asChild variant="outline" size="sm" className="border-primary/50 text-primary hover:bg-primary/10">
             <Link href={project.projectUrl} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="mr-2 h-4 w-4" /> View Project
+              <span className="flex items-center">
+                <ExternalLink className="mr-2 h-4 w-4" /> View Project
+              </span>
             </Link>
           </Button>
         )}
         {project.githubUrl && (
           <Button asChild variant="ghost" size="sm" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
             <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-              <Github className="mr-2 h-4 w-4" /> GitHub
+              <span className="flex items-center">
+                <Github className="mr-2 h-4 w-4" /> GitHub
+              </span>
             </Link>
           </Button>
         )}
-      </CardFooter>
-    </Card>
+      </ProjectItemCardFooter>
+    </ProjectItemCard>
   );
 }
 
 export function ProjectShowcaseSection({ projects }: ProjectShowcaseSectionProps) {
   return (
-    <SectionWrapper id="portfolio" className="bg-background"> {/* Changed to bg-background */}
-      <SectionTitle subtitle="A selection of projects I've worked on.">Portfolio</SectionTitle>
-      {projects.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-      ) : (
-        <p className="text-center text-muted-foreground">No projects to display yet.</p>
-      )}
+    <SectionWrapper id="portfolio">
+      <Card className="bg-card shadow-lg">
+        <CardHeader>
+          <SectionTitle subtitle="A selection of projects I've worked on.">Portfolio</SectionTitle>
+        </CardHeader>
+        <CardContent>
+          {projects.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project) => (
+                <ProjectItemDisplay key={project.id} project={project} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-muted-foreground">No projects to display yet.</p>
+          )}
+        </CardContent>
+      </Card>
     </SectionWrapper>
   );
 }

@@ -68,9 +68,9 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
           )}
         </div>
 
-        <div className="flex space-x-4 w-full justify-center md:justify-start">
+        <div className="flex space-x-4 w-full justify-center md:justify-start max-w-xs md:max-w-full">
           {profile.socialLinks.map((link) => {
-            const IconComponent = link.icon && iconComponents[link.icon] ? iconComponents[link.icon] : link.icon && iconComponents[link.icon.toLowerCase()] ? iconComponents[link.icon.toLowerCase()] : null;
+            const IconComponent = link.icon && iconComponents[link.icon] ? iconComponents[link.icon] : null;
             return (
               <Link
                 key={link.id}
@@ -92,8 +92,10 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
           className="w-full bg-card hover:bg-card/80 text-primary border border-primary/50 max-w-xs md:max-w-full"
         >
           <Link href={profile.cvUrl} target="_blank" download>
-            <Download className="mr-2 h-5 w-5" />
-            Download CV
+            <span className="flex items-center">
+              <Download className="mr-2 h-5 w-5" />
+              Download CV
+            </span>
           </Link>
         </Button>
       </div>
