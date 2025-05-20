@@ -3,6 +3,7 @@ import type { ProfileData } from '@/types';
 import { SectionWrapper } from '@/components/shared/SectionWrapper';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 
 interface AboutMeSectionProps {
   summary: ProfileData['summary'];
@@ -11,9 +12,10 @@ interface AboutMeSectionProps {
 export function AboutMeSection({ summary }: AboutMeSectionProps) {
   return (
     <SectionWrapper id="about">
-      <Card className="bg-card shadow-md">
+      <Card className="bg-background shadow-sm">
         <CardHeader>
           <SectionTitle>About Me</SectionTitle>
+          <Separator className="mt-4" />
         </CardHeader>
         <CardContent>
           <div className="prose prose-lg max-w-none text-foreground/90 leading-relaxed whitespace-pre-wrap dark:prose-invert">

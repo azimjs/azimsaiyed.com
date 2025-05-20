@@ -2,10 +2,10 @@
 import type { ServiceItem as ServiceItemType } from '@/types';
 import { SectionWrapper } from '@/components/shared/SectionWrapper';
 import { SectionTitle } from '@/components/shared/SectionTitle';
-import { Card, CardHeader, CardTitle, CardContent as MainCardContent } from '@/components/ui/card'; // Renamed CardContent to avoid clash
+import { Card, CardHeader, CardContent as MainCardContent } from '@/components/ui/card'; // Renamed CardContent to avoid clash
 import { Code, Palette, User, Search, type LucideProps } from 'lucide-react';
 import { Card as ServiceItemCard, CardContent as ServiceItemCardContent, CardHeader as ServiceItemCardHeader, CardTitle as ServiceItemCardTitle } from '@/components/ui/card';
-
+import { Separator } from '@/components/ui/separator';
 
 const serviceIconComponents: { [key: string]: React.ElementType<LucideProps> } = {
   Code,
@@ -21,9 +21,10 @@ interface ServicesSectionProps {
 export function ServicesSection({ services }: ServicesSectionProps) {
   return (
     <SectionWrapper id="services">
-      <Card className="bg-card shadow-md">
+      <Card className="bg-background shadow-sm">
         <CardHeader>
           <SectionTitle subtitle="Discover the ways I can help bring your ideas to life.">What I Do?</SectionTitle>
+          <Separator className="mt-4" />
         </CardHeader>
         <MainCardContent>
           {services.length > 0 ? (
@@ -31,7 +32,7 @@ export function ServicesSection({ services }: ServicesSectionProps) {
               {services.map((service) => {
                 const IconComponent = service.icon ? serviceIconComponents[service.icon] : null;
                 return (
-                  <ServiceItemCard key={service.id} className="shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col text-center md:text-left bg-background"> {/* Service items on slightly different bg */}
+                  <ServiceItemCard key={service.id} className="shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col text-center md:text-left bg-card"> {/* Service items on card (darker) bg */}
                     <ServiceItemCardHeader className="items-center md:items-start">
                       {IconComponent && (
                         <div className="mb-3 text-primary bg-primary/10 p-3 rounded-lg inline-block">
@@ -41,7 +42,7 @@ export function ServicesSection({ services }: ServicesSectionProps) {
                       <ServiceItemCardTitle className="text-xl text-foreground">{service.title}</ServiceItemCardTitle>
                     </ServiceItemCardHeader>
                     <ServiceItemCardContent className="flex-grow">
-                      <p className="text-muted-foreground">{service.description}</p>
+                      <p className="text-foreground/90">{service.description}</p>
                     </ServiceItemCardContent>
                   </ServiceItemCard>
                 );

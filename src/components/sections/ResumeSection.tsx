@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'; // Main Ca
 import { Card as ItemCard, CardContent as ItemCardContent, CardHeader as ItemCardHeader, CardTitle as ItemCardTitle, CardDescription as ItemCardDescription } from '@/components/ui/card'; // For inner items
 import { Briefcase, GraduationCap } from 'lucide-react';
 import Image from 'next/image';
+import { Separator } from '@/components/ui/separator';
 
 interface WorkExperienceItemProps {
   experience: WorkExperience;
@@ -13,7 +14,7 @@ interface WorkExperienceItemProps {
 
 function WorkExperienceItem({ experience }: WorkExperienceItemProps) {
   return (
-    <ItemCard className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 mb-6 bg-background"> {/* Item cards on slightly different bg */}
+    <ItemCard className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 mb-6 bg-card"> {/* Item cards on card (darker) bg */}
       <ItemCardHeader className="flex flex-row items-start gap-4 p-4 hover:bg-muted/10">
         {experience.logoUrl ? (
           <Image 
@@ -38,7 +39,7 @@ function WorkExperienceItem({ experience }: WorkExperienceItemProps) {
         </div>
       </ItemCardHeader>
       <ItemCardContent className="p-4">
-        <p className="text-sm text-foreground/80">{experience.description}</p>
+        <p className="text-sm text-foreground/90">{experience.description}</p>
       </ItemCardContent>
     </ItemCard>
   );
@@ -50,7 +51,7 @@ interface EducationItemProps {
 
 function EducationItem({ education }: EducationItemProps) {
   return (
-    <ItemCard className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 mb-6 bg-background"> {/* Item cards on slightly different bg */}
+    <ItemCard className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 mb-6 bg-card"> {/* Item cards on card (darker) bg */}
       <ItemCardHeader className="flex flex-row items-start gap-4 p-4 hover:bg-muted/10">
         <div className="flex items-center justify-center h-12 w-12 rounded-md bg-muted text-muted-foreground">
           <GraduationCap className="h-6 w-6" />
@@ -65,7 +66,7 @@ function EducationItem({ education }: EducationItemProps) {
       </ItemCardHeader>
       {education.description && (
         <ItemCardContent className="p-4">
-          <p className="text-sm text-foreground/80">{education.description}</p>
+          <p className="text-sm text-foreground/90">{education.description}</p>
         </ItemCardContent>
       )}
     </ItemCard>
@@ -80,9 +81,10 @@ interface ResumeSectionProps {
 export function ResumeSection({ workExperience, education }: ResumeSectionProps) {
   return (
     <SectionWrapper id="resume">
-      <Card className="bg-card shadow-md">
+      <Card className="bg-background shadow-sm">
         <CardHeader>
           <SectionTitle subtitle="My professional journey and academic qualifications.">Resume</SectionTitle>
+          <Separator className="mt-4" />
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
