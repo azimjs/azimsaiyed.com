@@ -1,7 +1,6 @@
 
 import { MOCK_PROFILE_DATA } from '@/lib/constants';
 import { LeftSidebar } from '@/components/layout/LeftSidebar';
-// import { NavigationMenu } from '@/components/layout/NavigationMenu'; // Removed
 import { AboutMeSection } from '@/components/sections/AboutMeSection';
 import { ServicesSection } from '@/components/sections/ServicesSection';
 import { ResumeSection } from '@/components/sections/ResumeSection';
@@ -26,8 +25,7 @@ export default function Home() {
           address: profileData.address,
         }}
       />
-      <main className="flex-1 md:ml-80 lg:ml-96 p-4 md:p-8 lg:p-10 overflow-y-auto">
-        {/* <NavigationMenu /> Removed */}
+      <main className="flex-1 md:ml-[50%] p-4 md:p-8 lg:p-10 overflow-y-auto">
         <AboutMeSection summary={profileData.summary} />
         <ServicesSection services={profileData.services} />
         <ResumeSection 
@@ -51,4 +49,3 @@ export default function Home() {
     </div>
   );
 }
-
