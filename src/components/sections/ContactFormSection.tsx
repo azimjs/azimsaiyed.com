@@ -1,9 +1,12 @@
+
 'use client';
 
+import type { ProfileData } from '@/types';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { SectionWrapper } from '@/components/shared/SectionWrapper';
+import { SectionTitle } from '@/components/shared/SectionTitle';
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,10 +19,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Mail, Send } from "lucide-react";
+import { Loader2, Mail, Send, Phone, MapPin } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -29,7 +33,11 @@ const contactFormSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
-export function ContactFormSection() {
+interface ContactFormSectionProps {
+  contactInfo: Pick<ProfileData, 'email' | 'phone' | 'address'>;
+}
+
+export function ContactFormSection({ contactInfo }: ContactFormSectionProps) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -44,7 +52,6 @@ export function ContactFormSection() {
 
   async function onSubmit(values: ContactFormValues) {
     setIsSubmitting(true);
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     console.log("Form Submitted:", values);
@@ -52,91 +59,123 @@ export function ContactFormSection() {
     toast({
       title: "Message Sent!",
       description: "Thank you for your message. I'll get back to you soon.",
-      variant: "default",
+      variant: "default", // Will use new theme colors
     });
     form.reset();
     setIsSubmitting(false);
   }
 
   return (
-    <SectionWrapper id="contact" className="bg-secondary/30">
-      <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold text-primary">Get In Touch</h2>
-        <p className="text-lg text-muted-foreground mt-2">
-          Have a question or want to collaborate? Send me a message!
-        </p>
+    <SectionWrapper id="contact" className="bg-background">
+      <SectionTitle subtitle="Feel free to reach out for collaborations or just a friendly chat.">Get In Touch</SectionTitle>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="md:col-span-1 space-y-6">
+          <Card className="shadow-md bg-card">
+            <CardHeader>
+              <CardTitle className="text-xl flex items-center text-foreground"><Mail className="mr-2 text-primary"/> Email</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Link href={`mailto:${contactInfo.email}`} className="text-primary hover:underline break-all">
+                {contactInfo.email}
+              </Link>
+            </CardContent>
+          </Card>
+          <Card className="shadow-md bg-card">
+            <CardHeader>
+              <CardTitle className="text-xl flex items-center text-foreground"><Phone className="mr-2 text-primary"/> Phone</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <span className="text-muted-foreground">{contactInfo.phone}</span>
+            </CardContent>
+          </Card>
+          {contactInfo.address && (
+            <Card className="shadow-md bg-card">
+              <CardHeader>
+                <CardTitle className="text-xl flex items-center text-foreground"><MapPin className="mr-2 text-primary"/> Address</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <span className="text-muted-foreground">{contactInfo.address}</span>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+
+        <div className="md:col-span-2">
+          <Card className="shadow-xl bg-card">
+            <CardHeader>
+              <CardTitle className="text-xl text-foreground">Send Me A Message</CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Fill out the form below and I'll get back to you as soon as possible.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-foreground/80">Full Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Your Name" {...field} disabled={isSubmitting} className="bg-background border-border focus:border-primary" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-foreground/80">Email Address</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="your.email@example.com" {...field} disabled={isSubmitting} className="bg-background border-border focus:border-primary" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-foreground/80">Message</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Your message..."
+                            rows={5}
+                            {...field}
+                            disabled={isSubmitting}
+                            className="bg-background border-border focus:border-primary"
+                          />
+                        </FormControl>
+                        <FormDescription className="text-xs text-muted-foreground">
+                          Max 500 characters.
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <div className="flex justify-end">
+                    <Button type="submit" disabled={isSubmitting} className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                      {isSubmitting ? (
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      ) : (
+                        <Send className="mr-2 h-4 w-4" />
+                      )}
+                      Send Message
+                    </Button>
+                  </div>
+                </form>
+              </Form>
+            </CardContent>
+          </Card>
+        </div>
       </div>
-      <Card className="max-w-xl mx-auto shadow-xl">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Mail className="text-accent" /> Contact Me</CardTitle>
-          <CardDescription>
-            Fill out the form below and I'll get back to you as soon as possible.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Full Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your Name" {...field} disabled={isSubmitting} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email Address</FormLabel>
-                    <FormControl>
-                      <Input type="email" placeholder="your.email@example.com" {...field} disabled={isSubmitting} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Message</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Your message..."
-                        rows={5}
-                        {...field}
-                        disabled={isSubmitting}
-                      />
-                    </FormControl>
-                    <FormDescription className="text-xs">
-                      Max 500 characters.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="flex justify-end">
-                <Button type="submit" disabled={isSubmitting} className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                  {isSubmitting ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  ) : (
-                    <Send className="mr-2 h-4 w-4" />
-                  )}
-                  Send Message
-                </Button>
-              </div>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
     </SectionWrapper>
   );
 }
