@@ -24,8 +24,13 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
     .map((n) => n[0])
     .join('');
 
+  const nameParts = profile.name.split(' ');
+  const firstName = nameParts.length > 0 ? nameParts[0] : '';
+  const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
+
   return (
-    <aside className="w-full md:w-1/2 bg-background text-foreground p-6 md:p-8 shadow-lg md:fixed md:h-screen md:overflow-y-auto flex flex-col items-center md:items-start md:justify-center space-y-6 print:hidden">
+    <aside className="w-full md:w-1/2 bg-background text-foreground p-6 md:p-8 shadow-lg md:fixed md:h-screen md:overflow-y-auto flex flex-col items-center justify-center space-y-6 print:hidden">
+      
       <Avatar className="w-32 h-32 md:w-40 md:h-40 text-5xl border-4 border-primary/50 shadow-md">
         <AvatarImage 
           src={profile.profileImageUrl || `https://placehold.co/200x200.png?text=${initials}`} 
@@ -35,11 +40,11 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
         <AvatarFallback>{initials}</AvatarFallback>
       </Avatar>
 
-      <div className="text-center md:text-left w-full">
+      <div className="text-center md:text-left w-full max-w-md">
         <h1 className="text-4xl lg:text-5xl font-bold text-foreground">
-          Hi, I’m <span className="text-primary">{profile.name}</span>
+          Hi, I’m <span className="text-primary">{firstName}</span> {lastName}
         </h1>
-        <p className="text-xl text-muted-foreground mt-2">{profile.headline}</p>
+        <p className="text-4xl lg:text-5xl font-bold text-muted-foreground mt-2">{profile.headline}</p>
       </div>
       
       <div className="w-full max-w-xs bg-card/50 p-4 rounded-lg space-y-3 text-sm">
@@ -63,7 +68,7 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
         )}
       </div>
 
-      <div className="flex space-x-4 justify-center md:justify-start">
+      <div className="flex space-x-4 justify-center md:justify-start w-full max-w-xs">
         {profile.socialLinks.map((link) => {
           const IconComponent = link.icon && iconComponents[link.icon] ? iconComponents[link.icon] : null;
           return (
