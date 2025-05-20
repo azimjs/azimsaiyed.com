@@ -39,7 +39,7 @@ function WorkExperienceItem({ experience }: WorkExperienceItemProps) {
         </div>
       </ItemCardHeader>
       <ItemCardContent className="p-4">
-        <p className="text-sm text-foreground/90">{experience.description}</p>
+        <p className="text-sm text-foreground/60">{experience.description}</p>
       </ItemCardContent>
     </ItemCard>
   );
@@ -66,7 +66,7 @@ function EducationItem({ education }: EducationItemProps) {
       </ItemCardHeader>
       {education.description && (
         <ItemCardContent className="p-4">
-          <p className="text-sm text-foreground/90">{education.description}</p>
+          <p className="text-sm text-foreground/60">{education.description}</p>
         </ItemCardContent>
       )}
     </ItemCard>
@@ -114,3 +114,4 @@ export function ResumeSection({ workExperience, education }: ResumeSectionProps)
     </SectionWrapper>
   );
 }
+

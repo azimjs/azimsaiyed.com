@@ -42,7 +42,7 @@ export function ServicesSection({ services }: ServicesSectionProps) {
                       <ServiceItemCardTitle className="text-xl text-foreground">{service.title}</ServiceItemCardTitle>
                     </ServiceItemCardHeader>
                     <ServiceItemCardContent className="flex-grow">
-                      <p className="text-foreground/90">{service.description}</p>
+                      <p className="text-foreground/60">{service.description}</p>
                     </ServiceItemCardContent>
                   </ServiceItemCard>
                 );
@@ -56,3 +56,4 @@ export function ServicesSection({ services }: ServicesSectionProps) {
     </SectionWrapper>
   );
 }
+

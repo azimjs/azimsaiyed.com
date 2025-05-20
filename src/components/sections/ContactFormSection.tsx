@@ -119,7 +119,7 @@ export function ContactFormSection({ contactInfo }: ContactFormSectionProps) {
               <InfoCard className="shadow-xl bg-card">
                 <InfoCardHeader>
                   <InfoCardTitle className="text-xl text-foreground">Send Me A Message</InfoCardTitle>
-                  <CardDescription className="text-foreground/90">
+                  <CardDescription className="text-foreground/60">
                     Fill out the form below and I'll get back to you as soon as possible.
                   </CardDescription>
                 </InfoCardHeader>
@@ -195,3 +195,4 @@ export function ContactFormSection({ contactInfo }: ContactFormSectionProps) {
     </SectionWrapper>
   );
 }
+

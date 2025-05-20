@@ -36,7 +36,7 @@ function ProjectItemDisplay({ project }: { project: Project }) {
       </div>
       <ProjectItemCardHeader className="pb-2">
         <ProjectItemCardTitle className="text-xl text-foreground">{project.name}</ProjectItemCardTitle>
-        <ProjectItemCardDescription className="h-20 overflow-y-auto text-sm pt-1 text-foreground/90">{project.description}</ProjectItemCardDescription>
+        <ProjectItemCardDescription className="h-20 overflow-y-auto text-sm pt-1 text-foreground/60">{project.description}</ProjectItemCardDescription>
       </ProjectItemCardHeader>
       <ProjectItemCardContent className="flex-grow pt-2">
         {project.tags && project.tags.length > 0 && (
@@ -94,3 +94,4 @@ export function ProjectShowcaseSection({ projects }: ProjectShowcaseSectionProps
     </SectionWrapper>
   );
 }
+
