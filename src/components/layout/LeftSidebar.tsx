@@ -19,18 +19,14 @@ interface LeftSidebarProps {
 }
 
 export function LeftSidebar({ profile }: LeftSidebarProps) {
-  const nameParts = profile.name.split(' ');
-  const firstName = nameParts[0];
-  const lastName = nameParts.slice(1).join(' ');
-  
   const initials = profile.name
     .split(' ')
     .map((n) => n[0])
     .join('');
 
   return (
-    <aside className="w-full md:w-1/2 bg-background text-foreground p-6 md:p-8 shadow-lg md:fixed md:h-screen md:overflow-y-auto flex flex-col items-center md:justify-center space-y-6 print:hidden">
-      <Avatar className="w-32 h-32 md:w-40 md:h-40 text-5xl border-4 border-primary/50 shadow-md mx-auto">
+    <aside className="w-full md:w-1/2 bg-background text-foreground p-6 md:p-8 shadow-lg md:fixed md:h-screen md:overflow-y-auto flex flex-col items-center md:items-start md:justify-center space-y-6 print:hidden">
+      <Avatar className="w-32 h-32 md:w-40 md:h-40 text-5xl border-4 border-primary/50 shadow-md">
         <AvatarImage 
           src={profile.profileImageUrl || `https://placehold.co/200x200.png?text=${initials}`} 
           alt={profile.name}
@@ -39,10 +35,9 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
         <AvatarFallback>{initials}</AvatarFallback>
       </Avatar>
 
-      <div className="text-center w-full">
-        <h1 className="text-4xl lg:text-5xl font-bold">
-          <span className="text-primary">{firstName}</span>
-          <span className="text-foreground"> {lastName}</span>
+      <div className="text-center md:text-left w-full">
+        <h1 className="text-4xl lg:text-5xl font-bold text-foreground">
+          Hi, I’m <span className="text-primary">{profile.name}</span>
         </h1>
         <p className="text-xl text-muted-foreground mt-2">{profile.headline}</p>
       </div>
@@ -68,7 +63,7 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
         )}
       </div>
 
-      <div className="flex space-x-4 justify-center">
+      <div className="flex space-x-4 justify-center md:justify-start">
         {profile.socialLinks.map((link) => {
           const IconComponent = link.icon && iconComponents[link.icon] ? iconComponents[link.icon] : null;
           return (
@@ -96,10 +91,6 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
           Download CV
         </Link>
       </Button>
-      {/* Consider adding a "Hire Me" button that links to #contact */}
-      {/* <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-        <Link href="#contact">Hire Me</Link>
-      </Button> */}
     </aside>
   );
 }
