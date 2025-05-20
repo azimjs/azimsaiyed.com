@@ -30,7 +30,7 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
 
   return (
     <aside className="w-full md:w-1/2 bg-background text-foreground p-6 md:p-8 shadow-lg md:fixed md:h-screen md:overflow-y-auto flex flex-col items-center justify-center print:hidden">
-      <div className="w-full max-w-md flex flex-col items-center md:items-start space-y-6">
+      <div className="w-full max-w-lg flex flex-col items-center md:items-start space-y-6">
         <Avatar className="w-32 h-32 md:w-40 md:h-40 text-5xl border-4 border-primary/50 shadow-md">
           <AvatarImage
             src={profile.profileImageUrl || `https://placehold.co/200x200.png?text=${initials}`}
@@ -41,10 +41,10 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
         </Avatar>
 
         <div className="text-center md:text-left w-full">
-          <h1 className="text-4xl lg:text-5xl font-bold text-foreground">
+          <h1 className="text-[60px] font-bold text-foreground leading-tight">
             Hi, I’m <span className="text-primary">{firstName}</span> {lastName}
           </h1>
-          <p className="text-4xl lg:text-5xl font-bold text-foreground mt-2">{profile.headline}</p>
+          <p className="text-[48px] font-bold text-foreground mt-2 leading-tight">{profile.headline}</p>
         </div>
 
         <div className="w-full bg-card/50 p-4 rounded-lg space-y-3 text-sm">
