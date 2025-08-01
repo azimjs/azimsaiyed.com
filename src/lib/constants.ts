@@ -7,16 +7,15 @@ export const MOCK_PROFILE_DATA: ProfileData = {
   headline: 'Software Engineer',
   profileImageUrl: '/profile-thumbnail.jpg', 
   summary:
-    "Hello! I'm Alex Johnson, a passionate Full Stack Developer based in San Francisco. I have a strong background in creating dynamic and responsive web applications, with a keen eye for detail and user experience. My expertise lies in JavaScript, React, Node.js, and Python, and I'm always eager to explore new technologies to build innovative solutions.\n\nI thrive in collaborative environments and enjoy tackling complex challenges. My goal is to leverage my skills to contribute to impactful projects that make a difference. When I'm not coding, you can find me exploring the latest tech trends or hiking in the nearby trails.",
+    "Hello! I'm Azim Saiyed, a passionate Full Stack Developer based in San Francisco. I have a strong background in creating dynamic and responsive web applications, with a keen eye for detail and user experience. My expertise lies in JavaScript, React, Node.js, and Python, and I'm always eager to explore new technologies to build innovative solutions.\n\nI thrive in collaborative environments and enjoy tackling complex challenges. My goal is to leverage my skills to contribute to impactful projects that make a difference. When I'm not coding, you can find me exploring the latest tech trends or hiking in the nearby trails.",
   socialLinks: [
-    { id: 'linkedin', name: 'LinkedIn', url: 'https://www.linkedin.com/in/alexjohnsondev', icon: "Linkedin" },
-    { id: 'github', name: 'GitHub', url: 'https://github.com/alexjohnsondev', icon: "Github" },
-    { id: 'twitter', name: 'Twitter', url: 'https://twitter.com/alexjohnsondev', icon: "Twitter" },
+    { id: 'linkedin', name: 'LinkedIn', url: 'https://www.linkedin.com/in/azimsaiyed/', icon: "Linkedin" },
+    { id: 'github', name: 'GitHub', url: 'https://github.com/azimjs', icon: "Github" },
   ],
-  cvUrl: '/cv-alex-johnson.pdf', // Placeholder URL
-  email: 'alex.johnson.dev@example.com',
-  phone: '+1 123 456 7890',
-  address: '123 Tech Street, San Francisco, CA',
+  cvUrl: '/azimsaiyed-cv.pdf', // Placeholder URL
+  email: 'contact@azimsaiyed.com',
+  phone: '',
+  address: 'Dallas, TX',
   services: [
     {
       id: 's1',
