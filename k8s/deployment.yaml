@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azimsaiyed-website
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: azimsaiyed-website
+  template:
+    metadata:
+      labels:
+        app: azimsaiyed-website
+    spec:
+      containers:
+        - name: azimsaiyed-website
+          image: azimsaiyed-website:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: PORT
+              value: "80"
