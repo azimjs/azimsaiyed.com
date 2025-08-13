@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useAnalytics } from '@/hooks/use-analytics';
 
 interface AnalyticsProviderProps {

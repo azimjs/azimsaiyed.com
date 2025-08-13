@@ -1,6 +1,5 @@
 'use client';
 
-import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { analyticsConfig } from '@/lib/analytics';
 
@@ -15,17 +14,15 @@ declare global {
 }
 
 export const useAnalytics = () => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  // Track page views
+  // Track page views using window.location (works in both dev and static export)
   useEffect(() => {
     if (analyticsConfig.googleAnalyticsId && typeof window !== 'undefined' && window.gtag) {
+      const pagePath = window.location.pathname + window.location.search;
       window.gtag('config', analyticsConfig.googleAnalyticsId, {
-        page_path: pathname + searchParams.toString(),
+        page_path: pagePath,
       });
     }
-  }, [pathname, searchParams]);
+  }, []);
 
   // Track custom events
   const trackEvent = (
