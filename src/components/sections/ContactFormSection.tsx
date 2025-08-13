@@ -24,6 +24,7 @@ import { Card as InfoCard, CardContent as InfoCardContent, CardHeader as InfoCar
 import { Separator } from '@/components/ui/separator';
 
 import { useToast } from "@/hooks/use-toast";
+import { useAnalytics } from "@/hooks/use-analytics";
 import { Loader2, Mail, Send, Phone, MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -42,6 +43,7 @@ interface ContactFormSectionProps {
 
 export function ContactFormSection({ contactInfo }: ContactFormSectionProps) {
   const { toast } = useToast();
+  const { trackFormSubmission, trackButtonClick } = useAnalytics();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentDate, setCurrentDate] = useState<string | null>(null);
 
@@ -61,6 +63,10 @@ export function ContactFormSection({ contactInfo }: ContactFormSectionProps) {
 
   async function onSubmit(values: ContactFormValues) {
     setIsSubmitting(true);
+    
+    // Track form submission
+    trackFormSubmission('contact_form');
+    
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
     
@@ -175,7 +181,12 @@ export function ContactFormSection({ contactInfo }: ContactFormSectionProps) {
                         )}
                       />
                       <div className="flex justify-end">
-                        <Button type="submit" disabled={isSubmitting} className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                        <Button 
+                          type="submit" 
+                          disabled={isSubmitting} 
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                          onClick={() => trackButtonClick('send_message_button', 'contact_form')}
+                        >
                           {isSubmitting ? (
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                           ) : (
