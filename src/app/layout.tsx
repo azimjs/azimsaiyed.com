@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({ // Changed from GeistMono to Geist_Mono
 });
 
 export const metadata: Metadata = {
-  title: 'PersonaLink', // Updated app title
-  description: 'Your AI-Personalized Professional Portfolio', // Updated app description
+  title: 'Azim Saiyed - Software Engineer', // Updated app title
+  description: "Azim Saiyed's portfolio – Lead Full-Stack Engineer specializing in React, Node.js, TypeScript, and cloud solutions.",
 };
 
 export default function RootLayout({
