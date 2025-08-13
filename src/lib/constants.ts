@@ -11,9 +11,8 @@ export const MOCK_PROFILE_DATA: ProfileData = {
   socialLinks: [
     { id: 'linkedin', name: 'LinkedIn', url: 'https://www.linkedin.com/in/azimsaiyed/', icon: "Linkedin" },
     { id: 'github', name: 'GitHub', url: 'https://github.com/azimjs', icon: "Github" },
-    { id: 'website', name: 'Website', url: 'https://azimsaiyed.com', icon: "Globe" },
   ],
-  cvUrl: '/azimsaiyed-cv.pdf',
+  cvUrl: '',
   email: 'contact@azimsaiyed.com',
   phone: '',
   address: 'Dallas, TX',

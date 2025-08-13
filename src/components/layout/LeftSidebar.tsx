@@ -86,18 +86,20 @@ export function LeftSidebar({ profile }: LeftSidebarProps) {
           })}
         </div>
 
-        <Button
-          asChild
-          size="lg"
-          className="w-full bg-card hover:bg-card/80 text-primary border border-primary/50 max-w-xs md:max-w-full"
-        >
-          <Link href={profile.cvUrl} target="_blank" download>
-            <span className="flex items-center">
-              <Download className="mr-2 h-5 w-5" />
-              Download CV
-            </span>
-          </Link>
-        </Button>
+        {profile.cvUrl && (
+          <Button
+            asChild
+            size="lg"
+            className="w-full bg-card hover:bg-card/80 text-primary border border-primary/50 max-w-xs md:max-w-full"
+          >
+            <Link href={profile.cvUrl} target="_blank" download>
+              <span className="flex items-center">
+                <Download className="mr-2 h-5 w-5" />
+                Download CV
+              </span>
+            </Link>
+          </Button>
+        )}
       </div>
     </aside>
   );
