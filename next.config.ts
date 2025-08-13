@@ -1,8 +1,10 @@
 import type {NextConfig} from 'next';
 
+const isDevelopmentMode = process.env.NODE_ENV === 'development';
+
 const nextConfig: NextConfig = {
   /* config options here */
-  output: 'export',
+  ...(!isDevelopmentMode && { output: 'export' }),
   trailingSlash: true,
   typescript: {
     ignoreBuildErrors: true,
@@ -11,6 +13,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    ...(!isDevelopmentMode && { unoptimized: true }),
     remotePatterns: [
       {
         protocol: 'https',
