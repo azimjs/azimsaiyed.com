@@ -1,0 +1,61 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  claude-review:
+    if: github.event.label.name == 'claude-review-this'
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code Review
+        id: claude-review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+            COMMIT SHA: ${{ github.event.pull_request.head.sha }}
+
+            Please review this pull request and provide inline comments on specific problematic lines.
+
+            Review for:
+            - Code quality and best practices
+            - Potential bugs or issues
+            - Performance considerations
+            - Security concerns
+            - Missing test coverage
+            - Readability and reusability (DRY principle)
+
+            IMPORTANT: Post inline comments using the gh api command:
+
+            gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/comments \
+              -X POST \
+              -f body="Your detailed feedback here. Use ```suggestion blocks for fixes." \
+              -f commit_id="${{ github.event.pull_request.head.sha }}" \
+              -f path="path/to/file.tsx" \
+              -F line=LINE_NUMBER
+
+            Steps:
+            1. Use `gh pr diff ${{ github.event.pull_request.number }}` to see the changes
+            2. Identify problematic lines with their file paths and line numbers
+            3. For each issue, post an inline comment using gh api
+            4. Be constructive and include code suggestions when possible
+
+          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
+          # or https://docs.claude.com/en/docs/claude-code/cli-reference for available options
+          claude_args: '--allowed-tools "Read,Bash(gh api:*),Bash(gh pr diff:*),Bash(gh pr view:*)"'
