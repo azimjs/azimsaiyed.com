@@ -129,7 +129,7 @@ export function Hero() {
             </a>
           </div>
           <div className="portrait rv d2">
-            <img src="/profile-thumbnail.jpg" alt={`Portrait of ${PROFILE.name}`} width={230} height={288} />
+            <img src="/profile-thumbnail.jpg" alt={`Portrait of ${PROFILE.name}`} width={230} height={230} />
           </div>
         </div>
       </div>
