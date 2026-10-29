@@ -1,24 +1,34 @@
 import type {Metadata} from 'next';
-import { Geist, Geist_Mono } from 'next/font/google'; // Corrected import for Geist and Geist_Mono
+import { Bricolage_Grotesque, Inter, Instrument_Serif } from 'next/font/google';
 import './globals.css';
-import { Toaster } from "@/components/ui/toaster"; // Added Toaster
+import './site.css';
+import { Toaster } from "@/components/ui/toaster";
 import GoogleAnalyticsComponent from "@/components/analytics/GoogleAnalytics";
 import { AnalyticsProvider } from "@/components/providers/AnalyticsProvider";
 import { analyticsConfig } from "@/lib/analytics";
 
-const geistSans = Geist({ // Changed from GeistSans to Geist
-  variable: '--font-geist-sans',
+const display = Bricolage_Grotesque({
+  variable: '--font-display',
   subsets: ['latin'],
+  weight: ['400', '500', '700', '800'],
 });
 
-const geistMono = Geist_Mono({ // Changed from GeistMono to Geist_Mono
-  variable: '--font-geist-mono',
+const body = Inter({
+  variable: '--font-body',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
+
+const serif = Instrument_Serif({
+  variable: '--font-serif',
+  subsets: ['latin'],
+  weight: '400',
+  style: 'italic',
 });
 
 export const metadata: Metadata = {
-  title: 'Azim Saiyed - Software Engineer', // Updated app title
-  description: "Azim Saiyed's portfolio – Lead Full-Stack Engineer specializing in React, Node.js, TypeScript, and cloud solutions.",
+  title: 'Azim Saiyed | Growth Engineering Manager',
+  description: 'Azim Saiyed, Growth Engineering Manager at Collective. 10+ years building the engines that make products grow.',
 };
 
 export default function RootLayout({
@@ -28,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}> {/* Ensured font-sans is applied */}
+      <body className={`${display.variable} ${body.variable} ${serif.variable}`}>
         <AnalyticsProvider>
           {children}
           <Toaster />
